@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'chat/css/login_styles.css' %}">
+</head>
+<body>
+<div class='bold-line'></div>
+<div class='container'>
+    <div class='window'>
+        <div class='overlay'></div>
+        <div class='content'>
+            <div class='welcome'>Log in</div>
+            {% if show %}
+            <div class='error'>Something went wrong! Invalid login or password!</div>
+            {% endif %}
+            <form name="login" method="post">{% csrf_token %}
+                <div class='input-fields'>
+                    <input type='text' placeholder='Username' name="username" class='input-line full-width' required>
+                    <input type='password' placeholder='Password' name="password" class='input-line full-width'
+                           required>
+                </div>
+                <button class='ghost-round full-width' type="submit" name="login">Start messaging</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <script src="{% static 'chat/js/menu.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'chat/css/menu.css' %}">
+</head>
+<body>
+<div class='bold-line'></div>
+<div class='container'>
+    <div class='window'>
+        <div class='overlay'></div>
+        <div class='content'>
+            <form name="log_out" method="post">{% csrf_token %}
+                <button class='ghost-round' type="submit" name="log_out">Log out</button>
+            </form>
+            <div class='welcome'>MyChat</div>
+            <div class='subtitle'>Select somebody to chat with!</div>
+            {% if show %}
+            <div class='error'>No such user!</div>
+            {% endif %}
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">Search people</button>
+                <form name="to_chat" method="post">{% csrf_token %}
+                    <div id="myDropdown" class="dropdown-content">
+                        <input type="text" placeholder="Type username..." id="myInput" onkeyup="filterFunction()"
+                               name="username">
+                        {% for user in users %}
+                        <a>{{user.username}}</a>
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

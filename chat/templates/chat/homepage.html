@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'chat/css/login_styles.css' %}">
+</head>
+<body>
+<div class='bold-line'></div>
+<div class='container'>
+    <div class='window'>
+        <div class='overlay'></div>
+        <div class='content'>
+            <div class='welcome'>Welcome to MyChat!</div>
+            <div class='subtitle'>Hi there! Log into your account or create a new one if do not have.</div>
+            <form name="login" method="post">{% csrf_token %}
+                <button class='ghost-round full-width' type="submit" name="login">Log in</button>
+            </form>
+            <form name="register" method="post">{% csrf_token %}
+                <button class='ghost-round full-width' type="submit" name="register">Sign up</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

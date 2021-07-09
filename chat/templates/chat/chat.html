@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'chat/css/chat.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+<div class="chat_window">
+    <div class="top_menu">
+        <div class="buttons">
+            <form name="close" method="post">{% csrf_token %}
+                <button class='button close' type="submit" name="close"></button>
+            </form>
+        </div>
+        <div class="title">{{user.username}}</div>
+    </div>
+    <div class="message_input_wrapper">
+        <ul class="messages">
+            {% for message in messages %}
+            {% if message.from_user == user %}
+            <li class="message_input">
+                <div class="text_wrapper">
+                    <div class="text">{{message.text}}</div>
+                </div>
+            </li>
+            <div class="time_input">[{{message.time}}]</div>
+            {% else %}
+            <li class="message_output">
+                <div class="text_wrapper">
+                    <div class="text">{{message.text}} </div>
+                </div>
+            </li>
+            <div class="time_output">[{{message.time}}]</div>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="bottom_wrapper clearfix">
+        <form name="send" method="post">{% csrf_token %}
+            <div class="message_input_wrapper">
+                <input class="input" name="message" placeholder="Type your message here..." required>
+            </div>
+            <div class="send_message">
+                <button class='ghost-round' type="submit" name="send">Send message</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+</html>
